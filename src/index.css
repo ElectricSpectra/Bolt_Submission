@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto;   /* Allow vertical scrolling */
+  background: #000000;
+}
+
+#root {
+  min-height: 100vh; /* Allow content to extend vertically */
+  width: 100vw;
+  max-width: 100vw;  /* Prevent horizontal overflow */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background: #000000;
+}
+
+/* Ensure proper scaling at all zoom levels */
+.simulation-container {
+  transform-origin: top left;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Fix iframe scaling issues */
+iframe {
+  transform: scale(1);
+  transform-origin: 0 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important; /* Prevent horizontal overflow */
+}
+
+/* Ensure cards and containers scale properly */
+.card-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Custom scrollbar for dark theme (vertical only) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 0px; /* Remove horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ea580c;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Hide horizontal scrollbar for all browsers */
+::-webkit-scrollbar:horizontal {
+  display: none;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 24 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 24 100% 70%;
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 24 100% 30%;
+    --input: 0 0% 10%;
+    --ring: 24 100% 50%;
+    --chart-1: 24 100% 50%;
+    --chart-2: 24 100% 60%;
+    --chart-3: 24 100% 40%;
+    --chart-4: 24 100% 70%;
+    --chart-5: 24 100% 30%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background: #000000;
+  }
+}
+
+/* Enable vertical scrolling for specific layouts */
+.scrollable-container {
+  overflow-y: auto;   /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: 100vh;
+  width: 100%;
+  max-width: 100%;    /* Prevent horizontal overflow */
+}
+
+/* Ensure proper viewport handling */
+@media screen and (min-width: 1024px) {
+  .desktop-layout {
+    display: flex;
+    min-height: 100vh; /* Allow vertical extension */
+    width: 100vw;
+    max-width: 100vw;  /* Prevent horizontal overflow */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .simulation-panel {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;   /* Prevent horizontal overflow */
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .control-panel {
+    width: 320px;
+    min-width: 320px;  /* Ensure minimum width */
+    max-width: 320px;  /* Prevent expansion */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+}
+
+/* Fix scaling issues at different zoom levels */
+@media screen and (min-resolution: 96dpi) {
+  .simulation-container iframe {
+    zoom: 1;
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    max-width: 100% !important; /* Prevent horizontal overflow */
+  }
+}
+
+/* Ensure consistent sizing regardless of zoom */
+.full-viewport {
+  width: 100vw !important;
+  min-height: 100vh !important; /* Allow vertical extension */
+  max-width: 100vw !important;  /* Prevent horizontal overflow */
+  overflow-x: hidden !important; /* Prevent horizontal scrolling */
+}
+
+/* Additional utility classes for preventing horizontal scroll */
+.no-horizontal-scroll {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+.vertical-scroll-only {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  max-width: 100% !important;
+}
